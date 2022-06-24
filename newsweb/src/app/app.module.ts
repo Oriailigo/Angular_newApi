@@ -8,12 +8,14 @@ import { CardComponent } from './card/card.component';
 import { HttpClientModule } from '@angular/common/http';
 // importo mi s services creado de la terminal
 import { NewsapiservicesService } from './service/newsapiservices.service';
+import { ContentComponent } from './content/content.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     CardComponent,
+    ContentComponent,
   ],
   imports: [
     BrowserModule,
