@@ -12,11 +12,13 @@ export class CardComponent implements OnInit {
   // me creo un array y lo llamo dentro del ngOnit para pasarle el result
   cardDisplay:any=[];
   ngOnInit(): void {
-    // el card se subscribe al service
-    this._service.cardTarjeta().subscribe((result)=>{
-      console.log(result)
-      this.cardDisplay=result.articles; // me quedo con los valores de result
+     this.fetchNews(); // llamo al metodo
+  }
+  fetchNews(){
+     // el card se subscribe al service
+     this._service.getAllNews().subscribe((news)=>{
+      console.log(news)
+      this.cardDisplay=news.articles; // me quedo con los valores de result
     })
   }
-
 }

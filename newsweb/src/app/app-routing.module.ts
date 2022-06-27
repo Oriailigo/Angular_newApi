@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CardComponent } from './card/card.component';
+import { ContenidoComponent } from './contenido/contenido.component';
+import { HomeComponent } from './home/home.component';
+
 
 const routes: Routes = [
-  {path:'', component:CardComponent }, //home
+  {path:'home', component:HomeComponent }, //home
+  {path:'contenido/:id', component:ContenidoComponent }, //contenido
 ];
 
 @NgModule({
