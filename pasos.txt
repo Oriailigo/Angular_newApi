@@ -1,0 +1,67 @@
+correr app: ng serve
+
+primero por consola agregue la estructura de ficheros:
+        npm i --save para que este de manera local
+segundo me cree el app llamada newsweb
+        ng new newsweb
+tercero para saber que funciona, es el run del app (siempre debo estar posicionado en la carpeta donde este app):
+	ng serve
+cuarto cree un componente llamado card (siempre debo estar posicionado en la carpeta donde este app):
+        ng g c card
+
+quinto paso, importar la api news:ir a app.modelues.ts del app.
+        // importo la api de noticias
+	import { HttpClientModule } from '@angular/common/http';
+ y escribirlo tambien el el imports
+ 	imports: [
+    		BrowserModule,
+    		AppRoutingModule,
+    	// HttpClientModule añadir el import escrito
+    		HttpClientModule
+  	],
+
+sexto paso, en consola escribo (para generar un componente servicio):
+	ng g s service/newsapiservices
+luego vuelvo al app.modules.ts e importo mi s services creado de la terminal
+	import { NewsapiservicesService } from './service/newsapiservices.service';
+luego lo agrego al vector de providers
+	providers: [NewsapiservicesService],
+
+septimo paso voy a la carpeta service/ts
+e importo lo siguiente:
+	//importo 
+	import { HttpClient } from '@angular/common/http';
+luego reescribo el constructor agregandole como parametro:
+	constructor(private _http:HttpClient) {
+    
+   	}
+luego fuera del contrsctor agrego una variable que contiene la url de la noticia que quiero.
+	newsApi_url= "https://newsapi.org/v2/top-headlines?country=us&apiKey=8ab9f6a80b5241b4ba7f0b3938ea683e"
+// luego llamo al componente card() y le paso la url de noticias
+   	card():Observable<any>{
+    		return this._http.get(this.newsApi_url)
+   	}
+
+octavo paso: voy al ts del card e importo al service.
+import { NewsapiservicesService } from '../service/newsapiservices.service';
+
+
+
+noveno paso: Para tener rutas se deben escribir en aap-routing mediante el path e importando:
+	import { ContenidoComponent } from './contenido/contenido.component';
+	import { HomeComponent } from './home/home.component';
+
+	const routes: Routes = [
+  		{path:'home', component:HomeComponent }, //home
+  		{path:'contenido/:id', component:ContenidoComponent }, //contenido
+	];
+
+
+10 paso: Colocar la ruta de la app en app.component.ts:
+	@Component({
+  		selector: 'app-root',
+  		template:'<router-outlet></router-outlet>',
+  		styleUrls: ['./app.component.css']
+	})
+
+11 paso: pasaje de parametros con id: ver video 25 de platzi: https://platzi.com/clases/1670-angular-2019/23258-creando-el-detalle-de-cada-producto/
